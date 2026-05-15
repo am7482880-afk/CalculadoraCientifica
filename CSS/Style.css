@@ -1,0 +1,99 @@
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #e0e0e0;
+            background-image: radial-gradient(#bcbcbc 1px, transparent 1px); 
+            background-size: 20px 20px;
+        }
+
+        h1 {
+            font-size: 55px;
+            text-align: center;
+            font-weight: 600;
+            font-family: cursive;
+            margin-bottom: 20px;
+            color: rgb(0, 2, 65);
+            text-shadow: 2px 2px rgb(241, 241, 130);
+        }
+
+        #calculadora {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background-color: rgb(241, 241, 130);
+            padding: 40px;
+            padding-inline: 28px;
+            border-radius: 20px;
+            box-shadow: 6px 6px rgb(0, 2, 65);
+            font-family: cursive;
+            width: fit-content;
+        }
+
+        #operaciones {
+            padding: 15px;
+            width: 280px;
+            border-radius: 10px;
+            border-style: double;
+            border-color: black;
+            font-size: 24px;
+            box-shadow: 2px 3px rgb(0, 2, 65);
+            font-family: cursive;
+            background: white;
+            text-align: right;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        ul {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li, #borrar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: rgb(241, 241, 130);
+            box-shadow: 2px 3px rgb(0, 2, 65);
+            color: rgb(0, 0, 0);
+            font-size: 18px;
+            font-weight: 600;
+            transition: 400ms;
+            font-family: cursive;
+            cursor: pointer;
+            border: 1px solid black;
+            user-select: none;
+        }
+
+        li:hover, #borrar:hover {
+            background-color: rgb(235, 255, 59);
+            transform: translateY(-2px);
+            transition: 400ms;
+        }
+
+        li:active, #borrar:active {
+            transform: translateY(2px);
+            box-shadow: 1px 1px rgb(0, 2, 65);
+        }
+
+        #borrar {
+            margin-top: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: #f3f3f3; /* Color suave para borrar */
+        }
+
+        .igual {
+            background-color: rgb(235, 255, 59) !important;
+        }
