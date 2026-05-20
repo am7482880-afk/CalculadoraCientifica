@@ -1,5 +1,3 @@
-//crear las propiedades del objeto
-
 let p = {
     teclas: document.querySelectorAll("#calculadora ul li"),
     accion: null,
@@ -9,8 +7,6 @@ let p = {
     cantdecimal: false,
     resultado: false
 }
-
-//creas los metodos
 
 let m = {
     inicio: function () {
@@ -40,19 +36,24 @@ let m = {
                 break;
 
             case "simbolo":
-                //  Raíz cuadrada
-                if (digito == "√" || digito == "sen" || digito == "cos" ) {
+                // Lógica para raíz, seno y coseno 
+                if (digito == "√" || digito == "sen" || digito == "cos") {
                     let valorActual = eval(p.operacion.innerHTML);
-
-                    if (digito == "√") p.operacion.innerHTML = Math.sqrt(valorActual * Math.PI / 180);
+                    if (digito == "√") p.operacion.innerHTML = Math.sqrt(valorActual);
                     if (digito == "sen") p.operacion.innerHTML = Math.sin(valorActual * Math.PI / 180);
                     if (digito == "cos") p.operacion.innerHTML = Math.cos(valorActual * Math.PI / 180);
                     p.resultado = true;
                     p.cantisimbolo = 0;
                     p.cantdecimal = false;
-                } else {
-
-
+                } 
+                // Lógica para potencia 
+                else if (digito == "^") {
+                    p.operacion.innerHTML += "**";
+                    p.cantisimbolo++;
+                    p.resultado = false;
+                }
+                // Lógica normales 
+                else {
                     p.cantisimbolo++;
                     if (p.cantisimbolo == 1) {
                         if (p.operacion.innerHTML == "0") {
@@ -75,13 +76,16 @@ let m = {
                 break;
 
             case "igual":
-                // Validación de división por cero
                 if (p.operacion.innerHTML.includes("/0")) {
-                    p.operacion.innerHTML = "Error";
+                    p.operacion.innerHTML = "Error: Div 0";
                     p.resultado = true;
                 } else {
-                    p.operacion.innerHTML = eval(p.operacion.innerHTML);
-                    p.resultado = true;
+                    try {
+                        p.operacion.innerHTML = eval(p.operacion.innerHTML);
+                        p.resultado = true;
+                    } catch(e) {
+                        p.operacion.innerHTML = "Error";
+                    }
                 }
                 p.cantdecimal = false;
                 p.cantisimbolo = 0;
@@ -101,13 +105,13 @@ let m = {
 m.inicio();
 document.querySelector("#borrar").addEventListener("click", m.borrarCalculadora);
 
-// Eventos de teclado
 window.addEventListener("keydown", function(e) {
     if (e.key >= 0 && e.key <= 9) m.calcular("numero", e.key);
     if (e.key == "+" || e.key == "-" || e.key == "*" || e.key == "/") m.calcular("simbolo", e.key);
     if (e.key == "r" || e.key == "R") m.calcular("simbolo", "√");
-    if (e.key == "s" || e.key == "S") m.calcular("simbolo", "sen"); 
-    if (e.key == "c" || e.key == "C") m.calcular("simbolo", "cos"); 
+    if (e.key == "s" || e.key == "S") m.calcular("simbolo", "sen");
+    if (e.key == "c" || e.key == "C") m.calcular("simbolo", "cos");
+    if (e.key == "p" || e.key == "P") m.calcular("simbolo", "^"); 
     if (e.key == "." || e.key == ",") m.calcular("decimal", ".");
     if (e.key == "Enter") m.calcular("igual", "=");
     if (e.key == "Escape" || e.key == "Backspace") m.borrarCalculadora();
