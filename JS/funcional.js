@@ -77,7 +77,7 @@ let m = {
 
             case "igual":
                 if (p.operacion.innerHTML.includes("/0")) {
-                    p.operacion.innerHTML = "Error: Div 0";
+                    p.operacion.innerHTML = "Error";
                     p.resultado = true;
                 } else {
                     try {
